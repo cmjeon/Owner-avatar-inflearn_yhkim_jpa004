@@ -68,4 +68,15 @@ class MemberRepositoryTest {
         assertThat(result.size()).isEqualTo(2);
     }
 
+    @Test
+    public void testNamedQuery() {
+        Member member1 = new Member("member", 10);
+        Member member2 = new Member("member", 20);
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+
+        List<Member> result = memberRepository.findByUsername("member");
+        assertThat(result.size()).isEqualTo(2);
+    }
+
 }
