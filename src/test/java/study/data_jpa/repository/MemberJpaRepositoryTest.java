@@ -79,4 +79,15 @@ class MemberJpaRepositoryTest {
         assertThat(result.size()).isEqualTo(2);
     }
 
+    @Test
+    public void testQuery() {
+        Member member1 = new Member("member", 10);
+        Member member2 = new Member("member", 20);
+        memberJpaRepository.save(member1);
+        memberJpaRepository.save(member2);
+
+        List<Member> result = memberJpaRepository.findByUsernameAndAgeGreaterThan("member", 15);
+        assertThat(result.size()).isEqualTo(1);
+    }
+
 }
