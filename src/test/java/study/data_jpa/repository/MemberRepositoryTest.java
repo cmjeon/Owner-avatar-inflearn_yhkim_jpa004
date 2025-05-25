@@ -228,4 +228,25 @@ class MemberRepositoryTest {
         em.flush(); //Update Query 실행X
     }
 
+    @Test
+    public void lock() throws Exception {
+        //given
+        Member member1 = new Member("member1", 10);
+        memberRepository.save(member1);
+        em.flush();
+        em.clear();
+
+        //when
+        List<Member> result = memberRepository.findByUsername("member1");
+        Member findMember = result.get(0);
+
+        //then
+        assertThat(findMember.getUsername()).isEqualTo("member1");
+    }
+
+    @Test
+    public void callCustom() {
+        List<Member> members = memberRepository.findMemberCustom();
+    }
+
 }
